@@ -1,27 +1,121 @@
-# TSDX Bootstrap
+# Theminator
 
-This project was bootstrapped with [TSDX](https://github.com/jaredpalmer/tsdx).
+Enhance your theme objects.
 
-## Local Development
+## Installation
+
+```sh
+yarn add theminator
+```
+
+or
+
+```sh
+npm i theminator
+```
+
+## Quick start
+
+### 1. Import Theminator.
+
+```js
+import decorate from 'theminator';
+```
+
+### 2. Create your theme object.
+
+A theme object needs to have at least a `colors` key and a `dimensions` key at the top level. Feel free to nest values as deep as you want, the only requirement is that primitive values need to be parseable as a color value or a dimension value respectively. The rest of the top level keys are ignored and can contain anything.
+
+```js
+const theme = {
+  colors: {
+    button: {
+      primary: '#123456',
+      secondary: '#654321',
+    },
+  },
+  dimensions: {
+    borderWidth: '1px',
+    circle: {
+      borderRadius: '50%',
+    },
+  },
+  extra: 'I am ignored.',
+};
+```
+
+### 3. Decorate it using Theminator. If you want, you can export it right away.
+
+```js
+export default decorate(theme);
+```
+
+### 4. Profit.
+
+```js
+// ...
+import theme from '../theme';
+
+const color = theme.colors.button.primary;
+const borderWidth = theme.dimensions.borderWidth;
+
+// ...
+
+<button
+  className={css`
+    background: ${color.css()};
+    border-color: ${color.darken(2).css()};
+    border-width: ${borderWidth.value * 2}${borderWidth.unit};
+  `}
+>
+  ...
+</button>;
+```
+
+## Documentation
+
+### `decorate(theme)` (default export)
+
+#### Parameters
+
+`theme`: an object containing a `colors` and a `dimensions` key.
+
+#### Return value
+
+An enhanced object of the same shape. Color values are wrapped with [chroma-js](https://gka.github.io/chroma.js). Dimension values are replaced with an object of the shape `{ css: string, value: number, unit: string }`. If a value is not valid, the function throws.
+
+### `decorateColors(colors)`
+
+#### Parameters
+
+`colors`: an object containing color values. Values can be nested as deep as you want but they need to be valid.
+
+#### Return value
+
+An enhanced object of the same shape. Values are wrapped with [chroma-js](https://gka.github.io/chroma.js). Called internally by `decorate()`.
+
+### `decorateDimensions(dimensions)`
+
+#### Parameters
+
+`dimensions`: an object containing dimension values. Values can be nested as deep as you want but they need to be valid.
+
+#### Return value
+
+An enhanced object of the same shape. Values are replaced with an object of the shape `{ css: string, value: number, unit: string }`. Called internally by `decorate()`.
+
+## Development
 
 Below is a list of commands you will probably find useful.
 
 ### `npm start` or `yarn start`
 
-Runs the project in development/watch mode. Your project will be rebuilt upon changes. TSDX has a special logger for you convenience. Error messages are pretty printed and formatted for compatibility VS Code's Problems tab.
-
-<img src="https://user-images.githubusercontent.com/4060187/52168303-574d3a00-26f6-11e9-9f3b-71dbec9ebfcb.gif" width="600" />
-
-Your library will be rebuilt if you make edits.
+Runs the project in development/watch mode.
 
 ### `npm run build` or `yarn build`
 
 Bundles the package to the `dist` folder.
-The package is optimized and bundled with Rollup into multiple formats (CommonJS, UMD, and ES Module).
-
-<img src="https://user-images.githubusercontent.com/4060187/52168322-a98e5b00-26f6-11e9-8cf6-222d716b75ef.gif" width="600" />
 
 ### `npm test` or `yarn test`
 
 Runs the test watcher (Jest) in an interactive mode.
-By default, runs tests related to files changed since the last commit.
