@@ -1,0 +1,45 @@
+{
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build"
+  },
+  "peerDependencies": {},
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "name": "theminator",
+  "author": "Andrew Prifer",
+  "module": "dist/theminator.esm.js",
+  "devDependencies": {
+    "@types/jest": "^25.1.2",
+    "husky": "^4.2.1",
+    "tsdx": "^0.12.3",
+    "tslib": "^1.10.0",
+    "typescript": "^3.7.5"
+  },
+  "dependencies": {
+    "@types/chroma-js": "^2.0.0",
+    "@types/lodash": "^4.14.149",
+    "chroma-js": "^2.1.0",
+    "lodash": "^4.17.15",
+    "lodash-es": "^4.17.15"
+  }
+}
