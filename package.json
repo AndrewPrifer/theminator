@@ -37,9 +37,7 @@
   },
   "dependencies": {
     "@types/chroma-js": "^2.0.0",
-    "@types/lodash": "^4.14.149",
     "chroma-js": "^2.1.0",
-    "lodash": "^4.17.15",
-    "lodash-es": "^4.17.15"
+    "deep-map-object": "^0.0.5"
   }
 }

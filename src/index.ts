@@ -1,38 +1,22 @@
 import chroma, { Color } from 'chroma-js';
-import { isPlainObject, mapValues } from 'lodash';
-
-type MappedValues<T, MappedValue> = {
-  [K in keyof T]: T[K] extends object
-    ? MappedValues<T[K], MappedValue>
-    : MappedValue;
-};
-
-const mapValuesDeep = <T extends object, Value, MappedValue>(
-  obj: T,
-  fn: (val: Value, key: string, obj: T) => MappedValue
-): MappedValues<T, MappedValue> =>
-  mapValues(obj, (val, key) =>
-    isPlainObject(val)
-      ? mapValuesDeep(val as any, fn)
-      : fn((val as unknown) as Value, key, obj)
-  ) as MappedValues<T, MappedValue>;
+import deepMap, { MappedValues } from 'deep-map-object';
 
 export const decorateColors = <Theme extends object>(
   theme: Theme
 ): MappedValues<Theme, Color> => {
-  return mapValuesDeep(theme, (value: any) => {
+  return deepMap((value: string) => {
     try {
       return chroma(value);
     } catch (e) {
       throw new Error(`${value} is not a valid color: ${e.message}`);
     }
-  });
+  })(theme);
 };
 
 export const decorateDimensions = <Theme extends object>(
   theme: Theme
 ): MappedValues<Theme, { css: string; value: number; unit: string }> => {
-  return mapValuesDeep(theme, (value: string | number) => {
+  return deepMap((value: string | number) => {
     if (value === 0 || value === '0') {
       return {
         css: '0',
@@ -58,7 +42,7 @@ export const decorateDimensions = <Theme extends object>(
       value: Number.parseFloat(match[1]),
       unit: match[2],
     };
-  });
+  })(theme);
 };
 
 export default <
