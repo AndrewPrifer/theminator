@@ -82,7 +82,7 @@ const borderWidth = theme.dimensions.borderWidth;
 
 #### Return value
 
-An enhanced object of the same shape. Color values are wrapped with [chroma-js](https://gka.github.io/chroma.js). Dimension values are replaced with an object of the shape `{ css: string, value: number, unit: string }`. If a value is not valid, the function throws.
+An enhanced object of the same shape. Color values are wrapped with [chroma-js](https://gka.github.io/chroma.js). Dimension values are replaced with an object of the shape `{ css: string, number: number, unit: string }`. If a value is not valid, the function throws.
 
 ### `decorateColors(colors)`
 
@@ -102,7 +102,7 @@ An enhanced object of the same shape. Values are wrapped with [chroma-js](https:
 
 #### Return value
 
-An enhanced object of the same shape. Values are replaced with an object of the shape `{ css: string, value: number, unit: string }`. Called internally by `decorate()`.
+An enhanced object of the same shape. Values are replaced with an object of the shape `{ css: string, number: number, unit: string }`. Called internally by `decorate()`.
 
 ## Development
 
