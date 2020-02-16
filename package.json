@@ -1,7 +1,7 @@
 {
   "version": "0.1.5",
   "license": "MIT",
-  "description": "Enhance your theme objects.",
+  "description": "Theminator replaces the colors and dimensions (e.g. #123456 or 12rem) in your theme with objects containing useful methods that you can use to create derived values, like a darkened version of the background color or a multiplied border width for a hover effect.",
   "repository": "AndrewPrifer/theminator",
   "keywords": [
     "react",

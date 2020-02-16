@@ -1,6 +1,6 @@
 # Theminator
 
-Theminator replaces your colors and dimensions (e.g. `#123456` or `12rem`) with objects containing useful methods that you can use to create derived values, like a darkened version of the background color or a multiplied border width for a hover effect.
+Theminator replaces the colors and dimensions (e.g. `#123456` or `12rem`) in your theme with objects containing useful methods that you can use to create derived values, like a darkened version of the background color or a multiplied border width for a hover effect.
 
 ## Installation
 
@@ -65,7 +65,7 @@ const borderWidth = theme.dimensions.borderWidth;
   className={css`
     background: ${color.css()};
     border-color: ${color.darken(2).css()};
-    border-width: ${borderWidth.value * 2}${borderWidth.unit};
+    border-width: ${borderWidth.value * 2} ${borderWidth.unit};
   `}
 >
   ...
