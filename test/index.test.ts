@@ -40,21 +40,19 @@ describe('decorateDimensions', () => {
         },
       })
     ).toEqual({
-      a: { css: '31px', value: 31, unit: 'px' },
-      b: { css: '22em', value: 22, unit: 'em' },
+      a: { css: '31px', number: 31, unit: 'px' },
+      b: { css: '22em', number: 22, unit: 'em' },
       c: {
-        d: { css: '-3vh', value: -3, unit: 'vh' },
-        e: { css: '0', value: 0, unit: '' },
-        f: { css: '0', value: 0, unit: '' },
-        g: { css: '34.5%', value: 34.5, unit: '%' },
+        d: { css: '-3vh', number: -3, unit: 'vh' },
+        e: { css: '0', number: 0, unit: '' },
+        f: { css: '0', number: 0, unit: '' },
+        g: { css: '34.5%', number: 34.5, unit: '%' },
       },
     });
   });
 
   it('throws for invalid values', () => {
-    expect(() => decorateDimensions({ a: 'a' })).toThrow();
-    expect(() => decorateDimensions({ a: '1pxx' })).toThrow();
-    expect(() => decorateDimensions({ a: '1' })).toThrow();
+    expect(() => decorateDimensions({ a: 'asdf' })).toThrow();
   });
 });
 

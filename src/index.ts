@@ -1,5 +1,6 @@
 import chroma, { Color } from 'chroma-js';
 import deepMap, { MappedValues } from 'deep-map-object';
+import parser from 'postcss-value-parser';
 
 export const decorateColors = <Theme extends object>(
   theme: Theme
@@ -15,32 +16,37 @@ export const decorateColors = <Theme extends object>(
 
 export const decorateDimensions = <Theme extends object>(
   theme: Theme
-): MappedValues<Theme, { css: string; value: number; unit: string }> => {
-  return deepMap((value: string | number) => {
-    if (value === 0 || value === '0') {
+): MappedValues<
+  Theme,
+  {
+    css: string;
+    number: number;
+    unit: string;
+  }
+> => {
+  return deepMap((value: string | number): {
+    css: string;
+    number: number;
+    unit: string;
+  } => {
+    if (typeof value === 'number') {
       return {
-        css: '0',
-        value: 0,
+        css: `${value}`,
+        number: value,
         unit: '',
       };
     }
 
-    if (typeof value !== 'string') {
-      throw new Error(`Value ${value} is not a valid dimension.`);
-    }
+    const parsedValue = parser.unit(value);
 
-    const match = value.match(
-      /^([-+]?[0-9]*\.?[0-9]+)(cm|mm|in|px|pt|pc|em|ex|ch|rem|vw|vh|vmin|vmax|%)$/i
-    );
-
-    if (match === null) {
-      throw new Error(`Value ${value} is not a valid dimension.`);
+    if (parsedValue === false) {
+      throw new Error(`${value} can't be parsed as a dimension.`);
     }
 
     return {
-      css: match[0],
-      value: Number.parseFloat(match[1]),
-      unit: match[2],
+      css: value,
+      number: Number.parseFloat(parsedValue.number),
+      unit: parsedValue.unit,
     };
   })(theme);
 };

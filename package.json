@@ -51,6 +51,7 @@
   "dependencies": {
     "@types/chroma-js": "^2.0.0",
     "chroma-js": "^2.1.0",
-    "deep-map-object": "^0.0.5"
+    "deep-map-object": "^0.0.5",
+    "postcss-value-parser": "^4.0.2"
   }
 }
