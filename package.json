@@ -53,5 +53,6 @@
     "chroma-js": "^2.1.0",
     "deep-map-object": "^0.0.5",
     "postcss-value-parser": "^4.0.2"
-  }
+  },
+  "sideEffects": false
 }
