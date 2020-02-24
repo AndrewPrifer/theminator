@@ -1,5 +1,5 @@
 {
-  "version": "0.2.2",
+  "version": "0.2.3",
   "license": "MIT",
   "description": "Theminator enhances the properties of your theme object with useful methods to help you more easily create derived values.",
   "repository": "AndrewPrifer/theminator",
